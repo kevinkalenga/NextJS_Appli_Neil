@@ -5,7 +5,7 @@ import {FaRegSmile} from "react-icons/fa"
 export default function Home() {
   return (
     <div>
-      <h1 className="text-center text-2xl flex justify-center items-center bg-red-700 w-full p-4 text-white">
+      <h1>
       Hello app!
     </h1>
     <Button 
