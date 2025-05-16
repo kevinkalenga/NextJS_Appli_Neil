@@ -1,6 +1,7 @@
 import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react"
 import { GiMatchTip } from 'react-icons/gi'
 import Link from "next/link"
+import NavLink from "./NavLink"
 export default function TopNav() {
   return (
     <Navbar
@@ -10,7 +11,8 @@ export default function TopNav() {
         item: [
           'text-xl',
           'text-white',
-          'uppercase'
+          'uppercase',
+          'data-[active=true]:text-yellow-200'
         ]
       }}
     >
@@ -22,9 +24,10 @@ export default function TopNav() {
         </div>
       </NavbarBrand>
       <NavbarContent justify="center">
-        <NavbarItem as={Link} href='/members'>Matches</NavbarItem>
-        <NavbarItem as={Link} href='/lists'>Lists</NavbarItem>
-        <NavbarItem as={Link} href='/messages'>Messages</NavbarItem>
+        <NavLink href='/members' label='Matches'/>
+        <NavLink href='/lists' label='Lists'/>
+        <NavLink href='/messages' label='Messages'/>
+       
       </NavbarContent>
       <NavbarContent justify="end">
         <Button as={Link} href="/auth/login" variant="bordered" className="text-white">Login</Button>
