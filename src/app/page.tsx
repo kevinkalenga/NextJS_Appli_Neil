@@ -1,8 +1,13 @@
+import { Button } from "@heroui/button";
+import {FaRegSmile} from "react-icons/fa"
 
 export default function Home() {
   return (
-    <div className="text-center text-2xl flex justify-center items-center bg-red-700 w-full p-4 text-white">
+    <div>
+      <h1 className="text-center text-2xl flex justify-center items-center bg-red-700 w-full p-4 text-white">
       Hello app!
+    </h1>
+    <Button color="primary" variant="bordered"  startContent={<FaRegSmile size={20} />}>Click me</Button>
     </div>
   );
 }
