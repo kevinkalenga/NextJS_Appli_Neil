@@ -2,17 +2,20 @@
 import { Card, CardHeader, CardBody, Input, Button } from '@nextui-org/react';
 import { GiPadlock } from 'react-icons/gi';
 import {useForm} from 'react-hook-form'
+import { LoginSchema, loginSchema } from '@/lib/schemas/loginSchema';
+import {zodResolver} from '@hookform/resolvers/zod'
+
 
 
 export default function LoginForm() {
-  type FormData = {
-  email: string;
-  password: string;
-};
 
-  const {register, handleSubmit, formState: {errors, isValid}} = useForm<FormData>()
+
+  const {register, handleSubmit, formState: {errors, isValid}} = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema), 
+    mode: 'onTouched'
+  })
   
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: LoginSchema) => {
     console.log(data)
   }
   
@@ -35,7 +38,7 @@ export default function LoginForm() {
                     defaultValue=''
                     label='Email'
                     variant='bordered'
-                    {...register('email', {required: 'Email is required'})}
+                    {...register('email')}
                     isInvalid={!!errors.email}
                     errorMessage={errors.email?.message as string}
                  />
@@ -44,7 +47,7 @@ export default function LoginForm() {
                     label='Password'
                     variant='bordered'
                     type='password'
-                    {...register('password', {required: 'Password is required'})}
+                    {...register('password')}
                     isInvalid={!!errors.password}
                     errorMessage={errors.password?.message as string}
                  />
