@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState } from 'react'
+// import { useState } from 'react'
 import { Card, CardHeader, CardBody, Input, Button } from '@nextui-org/react';
 import { GiPadlock } from 'react-icons/gi';
 import { useForm } from 'react-hook-form'
@@ -9,10 +9,11 @@ import { loginSchema, LoginSchema } from '@/lib/schemas/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const router = useRouter()
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  // const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const { register, handleSubmit, formState: { errors, isValid, isSubmitting } } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
@@ -20,7 +21,7 @@ export default function LoginForm() {
   })
 
   const onSubmit = async (data: LoginSchema) => {
-    setErrorMessage(null) // reset erreur avant chaque tentative
+    // setErrorMessage(null) // reset erreur avant chaque tentative
     const result = await signIn('credentials', {
       email: data.email,
       password: data.password,
@@ -32,8 +33,8 @@ export default function LoginForm() {
       router.push('/members')
     } else {
       // Affiche un message d'erreur friendly
-      setErrorMessage('Email and Password Invalid.')
-      console.log('Login failed', result?.error)
+      // setErrorMessage('Email and Password Invalid.')
+      toast.error( result?.error as string)
     }
   }
 
@@ -51,7 +52,7 @@ export default function LoginForm() {
 
       <CardBody>
         {/* Affichage du message d'erreur */}
-        {errorMessage && <div className="mb-4 text-center text-red-600">{errorMessage}</div>}
+        {/* {errorMessage && <div className="mb-4 text-center text-red-600">{errorMessage}</div>} */}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='space-y-4'>

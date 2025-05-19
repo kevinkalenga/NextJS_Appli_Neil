@@ -5,9 +5,10 @@ import {useForm} from 'react-hook-form'
 import { RegisterSchema, registerSchema } from '@/lib/schemas/registerSchema';
 import {zodResolver} from '@hookform/resolvers/zod'
 import { registerUser } from '@/app/actions/authActions';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterForm() {
-  
+    const router = useRouter()
     const {register, handleSubmit, setError, formState: {errors, isValid, isSubmitting}} = useForm<RegisterSchema>({
     // resolver: zodResolver(registerSchema), 
     mode: 'onTouched'
@@ -16,6 +17,7 @@ export default function RegisterForm() {
   const onSubmit = async(data: RegisterSchema) => {
     const result = await registerUser(data);
     if(result.status === 'success') {
+       router.push('/auth/login')
       console.log('User registered successfully')
     } else {
       if(Array.isArray(result.error)) {
