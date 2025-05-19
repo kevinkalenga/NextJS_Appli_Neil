@@ -39,3 +39,7 @@ export async function registerUser(data: RegisterSchema): Promise<ActionResult<U
     
     
 }
+
+export async function getUserById(id: string) {
+   return prisma.user.findUnique({where: {id}}) 
+}
