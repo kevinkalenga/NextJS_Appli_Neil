@@ -1,13 +1,9 @@
 
-
 // src/auth.ts
-import NextAuth from "next-auth"
-import {authConfig} from "./auth.config"
+import { getServerSession } from "next-auth";
+import { authConfig } from "./auth.config";
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth(authConfig)
+export const auth = () => getServerSession(authConfig);
+export { signIn, signOut } from "next-auth/react";
+
 

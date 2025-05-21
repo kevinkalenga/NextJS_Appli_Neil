@@ -1,8 +1,14 @@
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react"
+import { Button, Navbar, NavbarBrand, NavbarContent} from "@heroui/react"
 import { GiMatchTip } from 'react-icons/gi'
 import Link from "next/link"
 import NavLink from "./NavLink"
-export default function TopNav() {
+import { auth } from "@/auth"
+import UserMenu from './UserMenu'
+
+export default async function TopNav() {
+  const session = await auth()
+     console.log("SESSION:", session);
+    
   return (
     <Navbar
       maxWidth="xl"
@@ -30,8 +36,15 @@ export default function TopNav() {
        
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button as={Link} href="/auth/login" variant="bordered" className="text-white">Login</Button>
+          {session?.user ?(
+            <UserMenu user={session.user} />
+          ):(
+            <>
+               <Button as={Link} href="/auth/login" variant="bordered" className="text-white">Login</Button>
         <Button as={Link} href="/auth/register" variant="bordered" className="text-white">Register</Button>
+            </>
+          )}
+        
       </NavbarContent>
     </Navbar>
   )
