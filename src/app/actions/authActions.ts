@@ -33,6 +33,17 @@ export async function signInUser(data: LoginSchema): Promise<ActionResult<string
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
 export async function registerUser(data: RegisterSchema): Promise<ActionResult<User>> {
     try {
         const validated = registerSchema.safeParse(data);

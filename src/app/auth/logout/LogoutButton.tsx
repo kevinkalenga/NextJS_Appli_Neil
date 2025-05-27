@@ -5,9 +5,18 @@ import { Button } from '@nextui-org/react'
 import {FaRegSmile} from "react-icons/fa"
 
 export default function LogoutButton() {
+  
+  
+   const handleLogout = async () => {
+    await signOut({ callbackUrl: '/' })
+  }
+  
+  
+  
   return (
     <Button
-          onClick={() => signOut()}
+       onPress={handleLogout}
+          // onClick={() => signOut()}
          className='mt-3'
          type="submit"
          color='primary' 

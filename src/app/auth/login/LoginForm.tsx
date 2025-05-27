@@ -31,6 +31,7 @@ export default function LoginForm() {
 
     if (result?.ok) {
       router.push('/members')
+      router.refresh()
     } else {
       // Affiche un message d'erreur friendly
       // setErrorMessage('Email and Password Invalid.')
